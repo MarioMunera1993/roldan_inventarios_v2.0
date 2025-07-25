@@ -1,0 +1,6 @@
+.alert-success { color: #2ecc71; font-weight: bold; margin-bottom: 1rem; }
+.alert-error { color: #e74c3c; font-weight: bold; margin-bottom: 1rem; }
+.table-mant { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+.table-mant th, .table-mant td { border: 1px solid #ccc; padding: 0.5rem; }
+.table-mant th { background: #f4f6f8; }
+.table-mant a { color: #3498db; text-decoration: underline; }
