@@ -30,7 +30,7 @@ include_once 'pooTiposDispositivos.php';
                 <img src="../assest/img/logo.png" alt="Logo Roldán">
                 <span>nuevoTelefono</span>
                 <div class="app-header__search">
-                    <a href="#" class="button--danger">Cerrar sesión</a>
+                    <a href="./logout.php" class="button--danger">Cerrar sesión</a>
                 </div>
             </div>
         </header>
@@ -40,9 +40,9 @@ include_once 'pooTiposDispositivos.php';
             <aside class="app-sidebar" id="appSidebar">
                 <nav class="app-sidebar__nav">
                     <ul>
-                        <li><a href="../pages/home.html" class="app-sidebar__link">Inicio</a></li>
+                        <li><a href="./home.php" class="app-sidebar__link">Inicio</a></li>
+                        <li><a href="./vistaTablaTelefonos.php" class="app-sidebar__link">Regresar Tabla Telefonos</a></li>
                         <li><a href="vistaNuevoModelo.php" class="app-sidebar__link">Agregar Modelo</a></li>
-                        <li><a href="#" class="app-sidebar__link">.</a></li>
                         <li><a href="#" class="app-sidebar__link">.</a></li>
                         <li><a href="#" class="app-sidebar__link">.</a></li>
                     </ul>
