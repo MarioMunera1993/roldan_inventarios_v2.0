@@ -65,7 +65,7 @@ $marcas = Marcas::obtenerMarcas();
             </div>
             <div class="form-actions">
               <button type="submit" class="button button--success">Guardar Modelo</button>
-              <a href="tabla_computadores.php" class="button button--secondary">Cancelar</a>
+              <a href="./vistaTablaTelefonos.php" class="button button--secondary">Cancelar</a>
             </div>
           </form>
         </section>
