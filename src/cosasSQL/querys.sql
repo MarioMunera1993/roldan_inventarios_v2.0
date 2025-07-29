@@ -1,4 +1,4 @@
---######################################### Tablas normalizadas #########################################
+ï»¿--######################################### Tablas normalizadas #########################################
 
 create database inventario_tecnologico_prueba
 create database inventario_tecnologico
@@ -19,15 +19,17 @@ INSERT INTO Marcas (Nombre) VALUES ('Asus');
 INSERT INTO Marcas (Nombre) VALUES ('Acer');
 INSERT INTO Marcas (Nombre) VALUES ('Apple');       -- Para MacBooks
 INSERT INTO Marcas (Nombre) VALUES ('MSI');         -- Popular para gaming
-INSERT INTO Marcas (Nombre) VALUES ('Samsung');     -- Aunque menos comunes en laptops ahora, aún presentes
+INSERT INTO Marcas (Nombre) VALUES ('Samsung');     -- Aunque menos comunes en laptops ahora, aÃºn presentes
 INSERT INTO Marcas (Nombre) VALUES ('LG');          -- Similar a Samsung, tuvieron su auge
-INSERT INTO Marcas (Nombre) VALUES ('Toshiba');     -- Menos comunes ahora, pero históricamente relevantes
+INSERT INTO Marcas (Nombre) VALUES ('Toshiba');     -- Menos comunes ahora, pero histÃ³ricamente relevantes
 INSERT INTO Marcas (Nombre) VALUES ('Huawei');      -- Han ganado presencia en el mercado de laptops
-INSERT INTO Marcas (Nombre) VALUES ('Compaq');      -- Histórica, ahora parte de HP pero aún reconocida por algunos
+INSERT INTO Marcas (Nombre) VALUES ('Compaq');      -- HistÃ³rica, ahora parte de HP pero aÃºn reconocida por algunos
 INSERT INTO Marcas (Nombre) VALUES ('Janus');       -- Marca colombiana de ensamblaje
 INSERT INTO Marcas (Nombre) VALUES ('Compumax');    -- Otra marca colombiana de ensamblaje
 INSERT INTO Marcas (Nombre) VALUES ('PC Smart');    -- Marca local que ha tenido presencia
 INSERT INTO Marcas (Nombre) VALUES ('ECS');    -- Marca local que ha tenido presencia
+INSERT INTO Marcas (Nombre) VALUES ('Grandstream'); --marca de telefonos
+INSERT INTO Marcas (Nombre) VALUES ('Yealink'); --marca de telefonos
 
 -- select marcas
 SELECT * FROM Marcas
@@ -60,6 +62,10 @@ CREATE TABLE Tipos (
 INSERT INTO Tipos (Nombre) VALUES ('Portatil');
 INSERT INTO Tipos (Nombre) VALUES ('Escritorio');
 INSERT INTO Tipos (Nombre) VALUES ('Todo En Uno');
+--Tipos de telefonos
+INSERT INTO Tipos (Nombre) VALUES ('Inalambrico');
+INSERT INTO Tipos (Nombre) VALUES ('Fijo');
+
 
 --######################################### CRUDS Estados #########################################
 -- tabla de estados
@@ -190,7 +196,7 @@ CREATE TABLE DiscosDuros (
     IdCaracteristica INT NOT NULL,
     DescripcionDisco VARCHAR(100) NOT NULL,
     IdTipoDisco INT NOT NULL, -- Cambiado de TipoDisco VARCHAR
-    CapacidadGB INT NULL, -- Añadido como sugerencia
+    CapacidadGB INT NULL, -- AÃ±adido como sugerencia
     FOREIGN KEY (IdCaracteristica) REFERENCES Caracteristicas(IdCaracteristica),
     FOREIGN KEY (IdTipoDisco) REFERENCES TiposDisco(IdTipoDisco)
 );
@@ -215,7 +221,7 @@ INSERT INTO red(IdComputador,MacLocal)VALUES(2,'85-SE-27-D5-A3-BA')
 
 --######################################### CRUDS garantia #########################################
 
--- Tabla de garantía
+-- Tabla de garantÃ­a
 CREATE TABLE Garantias (
     IdGarantia INT PRIMARY KEY IDENTITY(1,1),
     IdComputador INT,
@@ -255,11 +261,11 @@ ALTER TABLE Usuarios
 ADD IdRol INT NOT NULL DEFAULT 1
     CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (IdRol) REFERENCES Roles(IdRol);
 
--- Ejemplo de inserción de roles
+-- Ejemplo de inserciÃ³n de roles
 INSERT INTO Roles (NombreRol) VALUES ('Administrador'), ('Usuario'), ('Invitado');
 
--- Ejemplo de creación de usuario con rol específico
--- (Recuerda generar el hash de la contraseña en PHP)
+-- Ejemplo de creaciÃ³n de usuario con rol especÃ­fico
+-- (Recuerda generar el hash de la contraseÃ±a en PHP)
 INSERT INTO Usuarios (Usuario, PasswordHash, IdRol)
 VALUES ('admin', '$2y$10$XDpRNiBvYkLMMupMdSFsXuchv.7VR95uHhPueG5YfnOx9ad7chYoG', 1);
 
@@ -272,49 +278,93 @@ DELETE FROM Usuarios WHERE IdUsuario = 2
 DBCC CHECKIDENT(Usuarios, RESEED, 0);
 
 --********************************************TABLAS TELEFONOS**************************************************
--- Tabla de Marcas
-CREATE TABLE MarcasTelefonos (
-    IdMarca INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100) NOT NULL UNIQUE
-);
-
--- Tabla de Modelos
-CREATE TABLE ModelosTelefonos (
-    IdModelo INT IDENTITY(1,1) PRIMARY KEY,
-    NombreModelo NVARCHAR(100) NOT NULL,
-    IdMarca INT NOT NULL,
-    FOREIGN KEY (IdMarca) REFERENCES Marcas(IdMarca)
-);
-
--- Tabla de Tipos de Teléfono
-CREATE TABLE TiposTelefono (
-    IdTipoTelefono INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(50) NOT NULL UNIQUE
-);
-
--- Tabla para almacenar las IPs de los teléfonos
+/*
+-- Tabla para almacenar las IPs de los telÃ©fonos
 CREATE TABLE IpTelefonos (
     IdIpTelefono INT IDENTITY(1,1) PRIMARY KEY,
-    Ip NVARCHAR(50) NOT NULL UNIQUE
+    Ip NVARCHAR(14) NOT NULL UNIQUE
 );
+*/
 
--- Tabla principal de Teléfonos
+drop table Telefonos
+
+-- Tabla principal de TelÃ©fonos
 CREATE TABLE Telefonos (
     IdTelefono INT IDENTITY(1,1) PRIMARY KEY,
+	PlacaTelefono INT UNIQUE,
     IdMarca INT NOT NULL,
     IdModelo INT NOT NULL,
     IdTipoTelefono INT NOT NULL,
-	IdIpTelefono INT NULL,
-    Mac NVARCHAR(50) NOT NULL UNIQUE,
+	IpTelefono VARCHAR(16) NULL,
+    Mac VARCHAR(50) NOT NULL UNIQUE,
     FechaCompra DATE NOT NULL,
+	IdEstado INT NOT NULL,
+	IdUbicacion INT NOT NULL,
     Precio DECIMAL(12,2) NOT NULL,
+	Notas VARCHAR(100),
     FOREIGN KEY (IdMarca) REFERENCES Marcas(IdMarca),
     FOREIGN KEY (IdModelo) REFERENCES Modelos(IdModelo),
-    FOREIGN KEY (IdTipoTelefono) REFERENCES TiposTelefono(IdTipoTelefono),
-	FOREIGN KEY (IdIpTelefono) REFERENCES IpTelefonos(IdIpTelefono)
+    FOREIGN KEY (IdTipoTelefono) REFERENCES Tipos(IdTipo),
+	FOREIGN KEY (IdEstado) REFERENCES Estados(IdEstado),
+	FOREIGN KEY (IdUbicacion) REFERENCES Ubicaciones(IdUbicacion)
 );
 
 
+SELECT
+t.PlacaTelefono,
+m.Nombre AS MarcaTelefono,
+md.NombreModelo AS ModeloTelefono,
+tp.Nombre AS TipoTelefono,
+t.IpTelefono,
+t.Mac,
+t.FechaCompra,
+e.Nombre AS EstadoTelefono,
+u.Nombre as Ubicacion,
+t.Precio,
+t.Notas
+FROM Telefonos AS t
+JOIN Modelos AS md ON md.IdModelo = t.IdModelo
+JOIN Marcas AS m ON md.IdMarca = m.IdMarca
+JOIN Tipos AS tp ON t.IdTipoTelefono = tp.IdTipo
+JOIN Estados AS e ON t.IdEstado = e.IdEstado
+JOIN Ubicaciones AS u ON t.IdUbicacion = u.IdUbicacion
+
+USE [inventario_tecnologico_prueba]
+GO
+
+INSERT INTO [dbo].[Telefonos]
+           ([PlacaTelefono]
+           ,[IdMarca]
+           ,[IdModelo]
+           ,[IdTipoTelefono]
+           ,[IpTelefono]
+           ,[Mac]
+           ,[FechaCompra]
+           ,[IdEstado]
+           ,[IdUbicacion]
+           ,[Precio]
+           ,[Notas])
+     VALUES
+           (2002
+           ,2
+           ,18
+           ,1
+           ,'192.168.20.1'
+           ,'VG-MJ-HG-25-04-30'
+           ,'20150101'
+           ,1
+           ,1
+           ,500000
+           ,'PRUEBITA')
+GO
+
+USE [inventario_tecnologico_prueba]
+GO
+
+/****** Object:  Table [dbo].[Telefonos]    Script Date: 29/07/2025 8:58:17â€¯a.â€¯m. ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Telefonos]') AND type in (N'U'))
+DROP TABLE [dbo].[Telefonos]
+GO
 
 
 --######################################### CONSULTAS CON JOINS #########################################

@@ -26,4 +26,26 @@ class Modelos {
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function agregarModelo($IdMarca, $NombreModelo){
+
+        try{
+
+            $conn = Conexion::conectar();
+            $conn->beginTransaction();
+        
+            $stmt = $conn->prepare("INSERT INTO Modelos (
+                                IdMarca,
+                                NombreModelo) 
+                                VALUES (?, ?)");
+            $stmt->execute([$IdMarca, $NombreModelo ]);
+            $conn->commit();
+            return true;
+
+        }catch (Exception $e) {
+            if (isset($conn)) $conn->rollBack();
+            return 'Error al guardar: ' . $e->getMessage();
+        }
+
+    }
 }
