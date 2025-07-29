@@ -96,7 +96,7 @@ include_once 'pooTelefonos.php';
         </footer>
     </div>
     <script src="../js/selecionarAño.js"></script>
-    <script src="../js/tablaTelefonos.js"></script>
+    <script src="../js/tablaComputadores.js"></script>
     <script src="../js/descargaExcelComputadores.js"></script>
     <script src="../js/menuHamburguesa.js"></script>
 </body>

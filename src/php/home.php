@@ -37,11 +37,12 @@
             </aside>
             <main class="app-main">
                 <h1>Nuevas Funcionalidades</h1>
-                <p>se crea lo que sera el home layout</p>
-                <p>Se organiza navegacion entre los link de la pagina</p>
+                <p>Ya deja agregar teléfonos </p>
+                <p>Toda la funcionalidad de Equipos esta ok </p>
                 <h2>Pendientes</h2>
-                <p>Los link estan en html convertit a php</p>
-                <p>Implementar en cada uno la logica php</p>
+                <p>Agregar función de editar teléfonos</p>
+                <p>Agregar función de descargar archivos de Excel para los teléfonos</p>
+                <p>Revisar funcionalidad de javaScrip(Ajax) para realizar filtrado en tiempo real</p>
             </main>
         </div>
 
