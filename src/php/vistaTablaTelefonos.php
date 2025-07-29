@@ -1,6 +1,6 @@
 <?php
 include_once('../php/auth.php');
-include_once 'pooComputadores.php';
+include_once 'pooTelefonos.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,11 +16,12 @@ include_once 'pooComputadores.php';
 
         <!--Encabezado-->
         <header class="app-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">&#9776;</button>
             <div class="app-header__logo">
                 <img src="../assest/img/logo.png" alt="Logo Roldán">
-                <span>Tabla Telefonos</span>
+                <span>Tabla Teléfonos</span>
                 <div class="app-header__search">
-                    <input type="search" id="searchInput" class="form-input" placeholder="Buscar telefono..." style="min-width:220px;">
+                    <input type="search" id="searchInput" class="form-input" placeholder="Buscar computador..." style="min-width:220px;">
                     <a href="logout.php" class="button--danger">Cerrar sesión</a>
                 </div>
             </div>
@@ -40,28 +41,49 @@ include_once 'pooComputadores.php';
                 </nav>
             </aside>
             <main class="app-main">
-                <h1 class="app-main__title">Listado de Telefonos</h1>
+                <h1 class="app-main__title">Listado de Teléfonos</h1>
                 <div class="app-main__actions">
-                    <a href="#" class="button button--success">+ Ingresar Nuevo Telefono</a>
+                    <a href="vistaNuevoTelefono.php" class="button button--success">+ Ingresar Nuevo Teléfono</a>
                     <a href="#" class="button button--excel">&#128202; Generar Excel</a>
                 </div>
                 <div class="table-container">
                     <table class="main-table" id="inventoryTable">
                         <thead>
                             <tr>
-                                <th>PlacaTelefono</th>
+                                <th>PlacaTeléfono</th>
                                 <th>Marca</th>
                                 <th>Modelo</th>
-                                <th>Serie</th>
-                                <th>Ip</th>
-                                <th>MacLocal</th>
+                                <th>TipoTeléfono</th>
+                                <th>IP</th>
+                                <th>MAC</th>
+                                <th>FechaCompra</th>
                                 <th>Estado</th>
-                                <th>Usuario</th>
-                                <th>Sede</th>
+                                <th>Precio</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php
+                            // Llamada al método para obtener los datos de los Telefonos
+                            $consulta = Telefonos::mostrarTotalTelefonos();
+                            foreach ($consulta as $Telefono): ?>
+                            <tr>
+                                <td><?php echo $Telefono['PlacaTelefono']; ?></td>
+                                <td><?php echo $Telefono['MarcaTelefono']; ?></td>
+                                <td><?php echo $Telefono['ModeloTelefono']; ?></td>
+                                <td><?php echo $Telefono['TipoTelefono']; ?></td>
+                                <td><?php echo $Telefono['IpTelefono']; ?></td>
+                                <td><?php echo $Telefono['Mac']; ?></td>
+                                <td><?php echo $Telefono['FechaCompra']; ?></td>
+                                <td><?php echo $Telefono['EstadoTelefono']; ?></td>
+                                <td><?php echo $Telefono['Precio']; ?></td>
+                                <td><?php echo $Telefono['Notas']; ?></td>
+                                <td>
+                                    <a href="vistaEditarComputador.php?id=<?php echo $computador['PlacaTelefono']; ?>" class="button--edit">Editar</a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +96,7 @@ include_once 'pooComputadores.php';
         </footer>
     </div>
     <script src="../js/selecionarAño.js"></script>
-    <script src="../js/tablaComputadores.js"></script>
+    <script src="../js/tablaTelefonos.js"></script>
     <script src="../js/descargaExcelComputadores.js"></script>
     <script src="../js/menuHamburguesa.js"></script>
 </body>
