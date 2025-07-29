@@ -43,7 +43,7 @@ include_once 'pooUbicaciones.php';
             <aside class="app-sidebar" id="appSidebar">
                 <nav class="app-sidebar__nav">
                     <ul>
-                        <li><a href="../pages/home.html" class="app-sidebar__link">Inicio</a></li>
+                        <li><a href="./home.php" class="app-sidebar__link">Inicio</a></li>
                         <li><a href="vistaNuevoMantenimiento.php" class="app-sidebar__link">Ingresar Mantenimiento</a></li>
                         <li><a href="#" class="app-sidebar__link">.</a></li>
                         <li><a href="#" class="app-sidebar__link">.</a></li>
