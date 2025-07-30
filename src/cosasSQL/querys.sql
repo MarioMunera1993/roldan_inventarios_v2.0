@@ -294,6 +294,7 @@ CREATE TABLE Telefonos (
 	PlacaTelefono INT UNIQUE,
     IdMarca INT NOT NULL,
     IdModelo INT NOT NULL,
+	Serial VARCHAR(50) NULL UNIQUE,
     IdTipoTelefono INT NOT NULL,
 	IpTelefono VARCHAR(16) NULL,
     Mac VARCHAR(50) NOT NULL UNIQUE,
@@ -365,6 +366,12 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Telefonos]') AND type in (N'U'))
 DROP TABLE [dbo].[Telefonos]
 GO
+
+alter table Telefonos
+add Serial varchar(50)
+after IdModelo
+
+
 
 
 --######################################### CONSULTAS CON JOINS #########################################

@@ -10,6 +10,7 @@ class Telefonos {
                     t.PlacaTelefono,
                     m.Nombre AS MarcaTelefono,
                     md.NombreModelo AS ModeloTelefono,
+                    t.Serial,
                     tp.Nombre AS TipoTelefono,
                     t.IpTelefono,
                     t.Mac,
@@ -39,6 +40,7 @@ class Telefonos {
             $PlacaTelefono = $_POST['PlacaTelefono'];
             $IdMarca = $_POST['IdMarca'];
             $IdModelo = $_POST['IdModelo'];
+            $Serial = $_POST['serial'];
             $IdTipo = $_POST['IdTipo'];
             $IpTelefono = $_POST['ipTelefono'];
             $Mac = $_POST['Mac'];
@@ -59,9 +61,10 @@ class Telefonos {
                                 IdEstado, 
                                 IdUbicacion,
                                 Precio, 
-                                Notas) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$PlacaTelefono, $IdMarca, $IdModelo, $IdTipo, $IpTelefono, $Mac, $fechaCompra, $IdEstado, $IdUbicacion, $Precio, $Observaciones, ]);
+                                Notas,
+                                Serial) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$PlacaTelefono, $IdMarca, $IdModelo, $IdTipo, $IpTelefono, $Mac, $fechaCompra, $IdEstado, $IdUbicacion, $Precio, $Observaciones, $Serial ]);
             $conn->commit();
             return true;
 

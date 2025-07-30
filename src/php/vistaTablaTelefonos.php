@@ -53,6 +53,7 @@ include_once 'pooTelefonos.php';
                                 <th>PlacaTeléfono</th>
                                 <th>Marca</th>
                                 <th>Modelo</th>
+                                <th>Serial</th>
                                 <th>TipoTeléfono</th>
                                 <th>IP</th>
                                 <th>MAC</th>
@@ -72,6 +73,7 @@ include_once 'pooTelefonos.php';
                                 <td><?php echo $Telefono['PlacaTelefono']; ?></td>
                                 <td><?php echo $Telefono['MarcaTelefono']; ?></td>
                                 <td><?php echo $Telefono['ModeloTelefono']; ?></td>
+                                <td><?php echo $Telefono['Serial']; ?></td>
                                 <td><?php echo $Telefono['TipoTelefono']; ?></td>
                                 <td><?php echo $Telefono['IpTelefono']; ?></td>
                                 <td><?php echo $Telefono['Mac']; ?></td>

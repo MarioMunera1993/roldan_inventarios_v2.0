@@ -91,6 +91,11 @@ include_once 'pooTiposDispositivos.php';
                             </div>
 
                             <div class="form-group">
+                                <label for="serial" class="form-label">Serial:</label>
+                                <input type="text" id="serial" name="serial" class="form-input"/>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="IdTipo" class="form-label">Tipo Telefono:</label>
                                 <select class="form-input" name="IdTipo" id="IdTipo">
                                     <option value="">Seleccione Tipo</option>
